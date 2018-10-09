@@ -3,20 +3,35 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "live-server public/",
+    "dev-server": "webpack-dev-server",
+    "build:dev": "webpack",
+    "build:prod": "webpack -p --env production",
+    "start": "node server/server.js",
+    "heroku-postbuild": "npm run build:prod"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kitmacleod/MB-WP-Demo.git"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kitmacleod/MB-WP-Demo/issues"
   },
   "homepage": "https://github.com/kitmacleod/MB-WP-Demo#readme",
   "devDependencies": {
+    "css-loader": "^1.0.0",
+    "style-loader": "^0.23.1",
     "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "dependencies": {
+    "copy-webpack-plugin": "^4.5.2",
+    "express": "^4.16.3",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "node": "^10.11.0",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0"
   }
 }
