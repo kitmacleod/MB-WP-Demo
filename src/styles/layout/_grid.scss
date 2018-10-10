@@ -1,0 +1,63 @@
+.container {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns:1fr 20rem;
+  grid-template-rows: 10rem 5rem 1fr 20rem 10rem;
+  grid-template-areas:
+  "header"
+  "nav"
+  "map-container"
+  "chart"
+  "input"
+  "footer";
+  height: 100%;
+  width: 100%;
+  // grid-template-columns: 40rem 20rem;
+  //  grid-template-rows: 4fr 1fr;
+ }
+ 
+ .header {
+   grid-area: header;
+ }
+ 
+ .nav {
+   grid-area: nav;
+ }
+ 
+ .map-container {
+   grid-area: map-container;
+ }
+ 
+ .chart {
+   grid-area: chart;
+ }
+ 
+ .input {
+   grid-area: input;
+ }
+ 
+ .footer {
+   grid-area: footer;
+ }
+ 
+ @media only screen and (min-width: $desktop-breakpoint) {
+   .container {
+     grid-template-columns: 3fr 1fr;
+     grid-template-areas:
+     "header header"
+     "nav nav"
+     "map-container chart"
+     "input input"
+     "footer footer"; 
+   }
+   nav ul {
+     display: flex;
+     justify-content: space-between;
+   }
+ }
+ 
+ 
+ 
+ 
+ 
+ 
