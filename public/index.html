@@ -6,27 +6,52 @@
     <meta name='viewport' content='width=device-width, initial-scale=1' />
     <!--<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script> -->
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
+    <!--<style>
     body { margin:0; padding:0 }
     #map { position:absolute; top:0; bottom:0; width: 100% }
-    </style>
+    </style>-->
 
   </head>
-  <body>
-    <div>
-      <h1>Test</h1>
-    </div>
-    <div id='map'></div>
 
-    <!----<script>
-        mapboxgl.accessToken = 'pk.eyJ1Ijoia2l0bWFjbGVvZCIsImEiOiJjaXdnOWF5YzQwMDBqMnlsZnNlYW05aHB1In0.9y6icPG278-a8uWZr8cmLQ';
-        var map = new mapboxgl.Map({
-            container: 'map', // container id
-            style: 'mapbox://styles/mapbox/streets-v9', // stylesheet location
-            center: [-74.50, 40], // starting position [lng, lat]
-            zoom: 9 // starting zoom
-        });
-        </script> -->
+  <body>
+
+
+    <div class="container">
+      <header class="header">
+        <h1 class="header__title">Aiding decisions about land management</h1>
+        <h2 class="header__subtitle">Under development: exploring what information can be provided</h2>
+      </header>
+      <nav class="nav">
+        <ul>
+            <li><a href="https://www.ruralpayments.org/publicsite/futures/topics/all-schemes/agri-environment-climate-scheme/">Information on Agri-Env Climate Scheme</a></li>
+            <li><a href="">Another link</a></li>
+        </ul>
+      </nav>
+      <div id="map-container"></div>
+      <div id="tools">
+        <a id="clear">Clear</a>
+      </div>
+      <div class="chart">
+        <h2 class="chart__title">Indication of environmental and financial outcomes</h2>
+        <h3 class="chart__subtitle">Information on environmental outcomes</h3>
+        <div id="view"></div>
+        <h3 class="chart__subtitle">Information on financial outcomes</h3>
+        <p class="text">Output from a calculation linked to AECS web pages</p>
+      </div>
+      <div class="input">
+        <h2 class="header__subtitle">Please select measure:</h2>
+        <form class="form-inline">
+          <label>Type of measure &nbsp;</label>
+          <select id="type">
+            <option value="area">Buffer (Polygon)</option>
+            <option value="length">Hedgerow (LineString)</option>
+          </select>
+        </form>
+      </div>
+      <footer class="main-footer">Additional information can appear here </footer>
+    </div>
+
+
 
     <script src="/dist/bundle.js"></script>
   </body>
