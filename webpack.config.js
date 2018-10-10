@@ -6,7 +6,7 @@ module.exports = (env) => {
   const isProduction = env === 'production';
 
   return {
-    entry:'./src/main.js',
+    entry:'./src/index.js',
     output: {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
