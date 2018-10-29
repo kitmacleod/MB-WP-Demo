@@ -28,6 +28,9 @@ module.exports = (env) => {
           ]
         }]
     },
+    node: {
+      fs: "empty"
+    },
     plugins: [
       new CopyPlugin([{from: 'data', to: 'data'}])
     ]
