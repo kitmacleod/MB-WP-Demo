@@ -1,0 +1,15 @@
+.calculation-box {
+  height: 75px;
+  width: 150px;
+  position: absolute;
+  bottom: 40px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, .9);
+  padding: 15px;
+  text-align: center;
+}
+
+.box__title {
+  font-size: $m-size;
+  margin: 0;
+}
