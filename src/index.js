@@ -2,7 +2,7 @@
 //import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
 import'./styles/styles.scss';
 // import MapboxDraw from '@mapbox/mapbox-gl-draw';
-// import '@mapbox/mapbox-gl-draw';
+import MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw';
 // import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 // var MapboxDraw = require('@mapbox/mapbox-gl-draw');
 
