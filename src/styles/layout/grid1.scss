@@ -10,8 +10,8 @@
   grid-area: map-container;
 }
 
-.chart {
-  grid-area: chart;
+.outcomes {
+  grid-area: outcomes;
 }
 
 .input {
@@ -31,7 +31,7 @@
   "nav"
   "map-container"
   "input"
-  "chart"
+  "outcomes"
   "footer";
   grid-template-rows: 1fr 1fr minmax(400px, 600px) 2fr 1fr;
   width: 95vw;
@@ -52,7 +52,7 @@ nav ul {
     grid-template-areas:
     "header header"
     "nav nav"
-    "map-container chart"
+    "map-container outcomes"
     "input input"
     "footer footer";
     // width: 95vw;
