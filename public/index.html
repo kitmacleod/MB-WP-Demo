@@ -7,6 +7,7 @@
     <!--<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script> -->
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v0.19.0/mapbox-gl-draw.css' type='text/css'>
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
     <!--<style>
     body { margin:0; padding:0 }
     #map { position:absolute; top:0; bottom:0; width: 100% }
@@ -36,7 +37,7 @@
       <div class="outcomes">
         <h2 class="outcomes__title">Indication of environmental and financial outcomes</h2>
         <h3 class="outcomes__subtitle">Information on area selected</h3>
-        <p class="outcomes__area">TEXT HERE</p>
+        <div id="outcomes__area"></div>
         <h3 class="outcomes__subtitle">Information on environmental outcomes</h3>
         <div id="view"></div>
         <h3 class="outcomes__subtitle">Information on financial outcomes</h3>
