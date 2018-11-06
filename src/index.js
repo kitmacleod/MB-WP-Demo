@@ -40,14 +40,20 @@ function updateArea(e) {
   console.log(area);
 
 
-// Still working on getting 'area' returned to html element, see notes
+// Getting 'area' returned to html element
 
   var answer = document.getElementById('outcomes-area');
   if (data.features.length > 0) {
     var area = turf.area(data);
-    var rounded_area = Math.round(area*100)/100;
+    let rounded_area = Math.round(area*100)/100;
     console.log(area);
     console.log(rounded_area);
+
+    const areaTemplate = html `<p>The area is ${rounded_area} square meters </p>`;
+    render(areaTemplate, outcomes__area);
+
+
+
     return `Rounded area ${area} square meters`;
 
 
@@ -59,6 +65,16 @@ function updateArea(e) {
        if (e.type !== 'draw.delete') alert("Use the draw tools to draw a polygon!");
   }
 }
+
+// Exploring inserting values with lit-html
+// Result: inserted raw string (not sure why, think it was due to )
+// const myName = 'Joe';
+// const helloTemplate1 = myName => html`<p>Hello${myName}</p>`;
+// render(helloTemplate1 ('Joe'), insertName);
+
+// // Copy lit-html example from sandbox
+// const helloTemplate = name => html`<p>Hello ${name} </p`;
+// render(helloTemplate("Bob"), nameLocation);
 
 
 
