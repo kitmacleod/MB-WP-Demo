@@ -14,17 +14,40 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoia2l0bWFjbGVvZCIsImEiOiJjam12d3F0Y3QyZXBvM3Zwb
 const map = new mapboxgl.Map({
   container: 'map-container',
   style: 'mapbox://styles/mapbox/streets-v9',
-  center: [-74.50, 40],
-  zoom: 9
+  // starting position [lng, lat]
+  //center: [-3.617, 57.035],
+  //zoom: 8
+  // WMS example
+  zoom: 8,
+  center: [-74.5447, 40.6892]
 });
 var draw = new MapboxDraw({
   displayControlsDefault: false,
   controls: {
     polygon: true,
     trash: true
-  }
+  } 
 });
 map.addControl(draw);
+
+// Looking to add WMS
+// Use MBGL exmaple https://www.mapbox.com/mapbox-gl-js/example/wms/
+map.on('load', function() {
+map.addLayer({
+  'id':'wms-test-layer',
+  'type': 'raster',
+  'source': {
+    'type': 'raster',
+    'tiles': [
+      'https://geodata.state.nj.us/imagerywms/Natural2015?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&transparent=true&width=256&height=256&layers=Natural2015'
+    ],
+    'tileSize': 256
+  },
+  'paint': {}
+  },'aeroway-taxiway');
+});
+
+
 
 // From MB-GL draw example
 map.on('draw.create', updateArea);
@@ -48,3 +71,5 @@ function updateArea(e) {
   render(areaTemplate, outcomes__area);
 
 };
+
+
