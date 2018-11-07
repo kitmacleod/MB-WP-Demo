@@ -31,54 +31,20 @@ map.on('draw.create', updateArea);
 map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
 
-
-// Need to check this, as not using <p>
+// Use lit-html to return polygon area or no area message
 function updateArea(e) {
-  var data = draw.getAll();
-  console.log(data);
-  var area = turf.area(data);
-  console.log(area);
+  let data = draw.getAll();
 
-
-// Getting 'area' returned to html element
-
-  var answer = document.getElementById('outcomes-area');
+  let areaMessage;
   if (data.features.length > 0) {
-    var area = turf.area(data);
+    let area = turf.area(data);
     let rounded_area = Math.round(area*100)/100;
-    console.log(area);
-    console.log(rounded_area);
-
-    const areaTemplate = html `<p>The area is ${rounded_area} square meters </p>`;
-    render(areaTemplate, outcomes__area);
-
-
-
-    return `Rounded area ${area} square meters`;
-
-
-    // answer.innerHTML = '<p><strong>' + rounded_area + '</strong></p><p>square meters</p>';
-
+    areaMessage = html`<p>The area is ${rounded_area} square meters </p>`
   } else {
-      console.log('error');
-     answer.innerHTML = '';
-       if (e.type !== 'draw.delete') alert("Use the draw tools to draw a polygon!");
-  }
-}
+    areaMessage = html`<p>No area selected</p>`
+  };  
 
-// Exploring inserting values with lit-html
-// Result: inserted raw string (not sure why, think it was due to )
-// const myName = 'Joe';
-// const helloTemplate1 = myName => html`<p>Hello${myName}</p>`;
-// render(helloTemplate1 ('Joe'), insertName);
+  const areaTemplate = html`${areaMessage}`;
+  render(areaTemplate, outcomes__area);
 
-// // Copy lit-html example from sandbox
-// const helloTemplate = name => html`<p>Hello ${name} </p`;
-// render(helloTemplate("Bob"), nameLocation);
-
-
-
-
-// map.on('load', function () {
-
-// });
+};
