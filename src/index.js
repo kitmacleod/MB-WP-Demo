@@ -13,13 +13,13 @@ import {html, render} from 'lit-html';
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2l0bWFjbGVvZCIsImEiOiJjam12d3F0Y3QyZXBvM3ZwbjRsajMwZG53In0.XU1YIWr-iN8_tovQx93X7A';
 const map = new mapboxgl.Map({
   container: 'map-container',
-  style: 'mapbox://styles/mapbox/streets-v9',
+  style: 'mapbox://styles/mapbox/outdoors-v10',
   // starting position [lng, lat]
-  //center: [-3.617, 57.035],
-  //zoom: 8
+  center: [-3.617, 57.035],
+  zoom: 8
   // WMS example
-  zoom: 8,
-  center: [-74.5447, 40.6892]
+  // zoom: 8,
+  // center: [-74.5447, 40.6892]
 });
 var draw = new MapboxDraw({
   displayControlsDefault: false,
@@ -28,24 +28,44 @@ var draw = new MapboxDraw({
     trash: true
   } 
 });
+
+// Add zoom and rotation controls to the map
+map.addControl(new mapboxgl.NavigationControl());
 map.addControl(draw);
 
-// Looking to add WMS
-// Use MBGL exmaple https://www.mapbox.com/mapbox-gl-js/example/wms/
+
+
+// Look to add a MB layer
 map.on('load', function() {
-map.addLayer({
-  'id':'wms-test-layer',
-  'type': 'raster',
-  'source': {
-    'type': 'raster',
-    'tiles': [
-      'https://geodata.state.nj.us/imagerywms/Natural2015?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&transparent=true&width=256&height=256&layers=Natural2015'
-    ],
-    'tileSize': 256
-  },
-  'paint': {}
-  },'aeroway-taxiway');
+  map.addLayer({
+    id: 'terrain-data',
+    type: 'line',
+    source: {
+      type: 'vector',
+      url: 'mapbox://mapbox.mapbox-terrain-v2'
+    },
+    'source-layer': 'contour'
+
+  });
 });
+
+
+// Adds a WMS (tested, maybe modify later)
+// Use MBGL exmaple https://www.mapbox.com/mapbox-gl-js/example/wms/
+// map.on('load', function() {
+// map.addLayer({
+//   'id':'wms-test-layer',
+//   'type': 'raster',
+//   'source': {
+//     'type': 'raster',
+//     'tiles': [
+//       'https://geodata.state.nj.us/imagerywms/Natural2015?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&transparent=true&width=256&height=256&layers=Natural2015'
+//     ],
+//     'tileSize': 256
+//   },
+//   'paint': {}
+//   },'aeroway-taxiway');
+// });
 
 
 
