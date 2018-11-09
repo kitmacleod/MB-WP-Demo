@@ -35,7 +35,7 @@ map.addControl(draw);
 
 
 
-// Look to add a MB layer
+// Add a MB layer for contours
 map.on('load', function() {
   map.addLayer({
     id: 'terrain-data',
@@ -48,6 +48,37 @@ map.on('load', function() {
 
   });
 });
+
+
+// Add MB layer for landuse (not fully working)
+map.on('load', function() {
+  map.addLayer({
+    id: 'terrain-land', 
+    type: 'fill',
+    source: {
+      type: 'vector',
+      url: 'mapbox://mapbox.mapbox-terrain-v2'
+    },
+    'source-layer': 'landcover'
+  });
+});
+
+
+// Add improved hillshading based on MBGL example
+map.on('load', function () {
+  map.addSource('dem', {
+      "type": "raster-dem",
+      "url": "mapbox://mapbox.terrain-rgb"
+  });
+  map.addLayer({
+      "id": "hillshading",
+      "source": "dem",
+      "type": "hillshade"
+  // insert below waterway-river-canal-shadow;
+  // where hillshading sits in the Mapbox Outdoors style
+  }, 'waterway-river-canal-shadow');
+});
+
 
 
 // Adds a WMS (tested, maybe modify later)
