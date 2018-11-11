@@ -10,6 +10,9 @@ import {html, render} from 'lit-html';
 // Not sure how to import turf here (need it for MB example and other work)
 // import turf from 'turf';
 
+import intersect from '@turf/intersect';
+import polygon from '@turf/helpers';
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2l0bWFjbGVvZCIsImEiOiJjam12d3F0Y3QyZXBvM3ZwbjRsajMwZG53In0.XU1YIWr-iN8_tovQx93X7A';
 const map = new mapboxgl.Map({
   container: 'map-container',
@@ -51,17 +54,17 @@ map.on('load', function() {
 
 
 // Add MB layer for landuse (not fully working)
-map.on('load', function() {
-  map.addLayer({
-    id: 'terrain-land', 
-    type: 'fill',
-    source: {
-      type: 'vector',
-      url: 'mapbox://mapbox.mapbox-terrain-v2'
-    },
-    'source-layer': 'landcover'
-  });
-});
+// map.on('load', function() {
+//   map.addLayer({
+//     id: 'terrain-land', 
+//     type: 'fill',
+//     source: {
+//       type: 'vector',
+//       url: 'mapbox://mapbox.mapbox-terrain-v2'
+//     },
+//     'source-layer': 'landcover'
+//   });
+// });
 
 
 // Add improved hillshading based on MBGL example
@@ -122,5 +125,74 @@ function updateArea(e) {
   render(areaTemplate, outcomes__area);
 
 };
+
+
+
+// Practice polygons 
+
+          
+          
+          
+          const polyLarge = turf.polygon([[
+            [
+              -3.922119140625,
+              56.88650220638941
+            ],
+            [
+              -3.409881591796875,
+              56.88650220638941
+            ],
+            [
+              -3.409881591796875,
+              57.125804948722575
+            ],
+            [
+              -3.922119140625,
+              57.125804948722575
+            ],
+            [
+              -3.922119140625,
+              56.88650220638941
+            ]
+          ]]);
+          
+          
+          const polyThin = turf.polygon([[
+            [
+              -4.069061279296875,
+              57.025036816645255
+            ],
+            [
+              -3.2148742675781246,
+              57.025036816645255
+            ],
+            [
+              -3.2148742675781246,
+              57.060150113451755
+            ],
+            [
+              -4.069061279296875,
+              57.060150113451755
+            ],
+            [
+              -4.069061279296875,
+              57.025036816645255
+            ]
+          ]]);
+
+
+
+console.log('polyLarge type: ',typeof polyLarge);
+console.log('polyThin type: ',typeof polyThin);
+
+
+
+
+// Turf intersection test
+let intersectTest = intersect(polyLarge, polyThin);
+console.log('in type intersectTest: ',typeof intersectTest);
+
+
+
 
 
