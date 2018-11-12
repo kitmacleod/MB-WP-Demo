@@ -16,14 +16,55 @@ import polygon from '@turf/helpers';
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2l0bWFjbGVvZCIsImEiOiJjam12d3F0Y3QyZXBvM3ZwbjRsajMwZG53In0.XU1YIWr-iN8_tovQx93X7A';
 const map = new mapboxgl.Map({
   container: 'map-container',
-  style: 'mapbox://styles/mapbox/outdoors-v10',
+  style: 'mapbox://styles/mapbox/streets-v9',
   // starting position [lng, lat]
-  center: [-3.617, 57.035],
-  zoom: 8
+  // CNPA coords
+  // center: [-3.617, 57.035],
+  // zoom: 8
   // WMS example
   // zoom: 8,
   // center: [-74.5447, 40.6892]
+
+  //US draw select example
+  center: [-98, 38.88],
+  zoom: 3
 });
+
+// Add US map layer for queryRender examples (may take function out into its own like draw)
+  map.on('load', function() {
+    // Add the source to query. In this example we're using
+    // county polygons uploaded as vector tiles
+    map.addSource('counties', {
+        "type": "vector",
+        "url": "mapbox://mapbox.82pkq93d"
+    });
+
+    map.addLayer({
+        "id": "counties",
+        "type": "fill",
+        "source": "counties",
+        "source-layer": "original",
+        "paint": {
+            "fill-outline-color": "rgba(0,0,0,0.1)",
+            "fill-color": "rgba(0,0,0,0.1)"
+        }
+    }, 'place-city-sm'); // Place polygon under these labels.
+
+
+  map.addLayer({
+    "id": "counties-highlighted",
+    "type": "fill",
+    "source": "counties",
+    "source-layer": "original",
+    "paint": {
+      "fill-outline-color": "#484896",
+      "fill-color": "#6e599f",
+      "fill-opacity": 0.75
+    },
+    "filter": ["in","COUNTY",""]
+  }, 'place-city-sm');
+});
+
 var draw = new MapboxDraw({
   displayControlsDefault: false,
   controls: {
@@ -67,20 +108,20 @@ map.on('load', function() {
 // });
 
 
-// Add improved hillshading based on MBGL example
-map.on('load', function () {
-  map.addSource('dem', {
-      "type": "raster-dem",
-      "url": "mapbox://mapbox.terrain-rgb"
-  });
-  map.addLayer({
-      "id": "hillshading",
-      "source": "dem",
-      "type": "hillshade"
-  // insert below waterway-river-canal-shadow;
-  // where hillshading sits in the Mapbox Outdoors style
-  }, 'waterway-river-canal-shadow');
-});
+// Add improved hillshading based on MBGL example (may add again)
+// map.on('load', function () {
+//   map.addSource('dem', {
+//       "type": "raster-dem",
+//       "url": "mapbox://mapbox.terrain-rgb"
+//   });
+//   map.addLayer({
+//       "id": "hillshading",
+//       "source": "dem",
+//       "type": "hillshade"
+//   // insert below waterway-river-canal-shadow;
+//   // where hillshading sits in the Mapbox Outdoors style
+//   }, 'waterway-river-canal-shadow');
+// });
 
 
 
@@ -117,6 +158,9 @@ function updateArea(e) {
     let area = turf.area(data);
     let rounded_area = Math.round(area*100)/100;
     areaMessage = html`<p>The area is ${rounded_area} square meters </p>`
+    console.log('data type of; ', typeof data);
+    // let intersectData = turf.intersect(data, polyLarge);
+    // console.log('intersectData type of; ', typeof intersectData);
   } else {
     areaMessage = html`<p>No area selected</p>`
   };  
@@ -128,7 +172,7 @@ function updateArea(e) {
 
 
 
-// Practice polygons 
+// Practice polygons CNPA
 
           
           
