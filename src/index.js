@@ -14,6 +14,8 @@ import intersect from '@turf/intersect';
 import polygon from '@turf/helpers';
 import bbox from '@turf/bbox';
 
+import Chart from 'chart.js';
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2l0bWFjbGVvZCIsImEiOiJjam12d3F0Y3QyZXBvM3ZwbjRsajMwZG53In0.XU1YIWr-iN8_tovQx93X7A';
 const map = new mapboxgl.Map({
   container: 'map-container',
@@ -237,6 +239,41 @@ map.on('draw.create', function(el) {
 //   render(areaTemplate, outcomes__area);
 
 // };
+
+
+
+// Chart example
+// get a basic chart working here linked to scss
+const ctx = document.getElementById("testChart");
+let testChart = new Chart(ctx, {
+  type: 'horizontalBar',
+  data: {
+  labels:["Population"],
+  datasets: [{
+    label: 'No of people',
+    data:[100],
+    backgroundColor: [
+      "rgba(54, 162, 235, 0.2)"
+    ],
+    borderColor: [
+      "rgba(54, 162,235, 1)"
+    ],
+    borderWidth: 1
+
+  }
+]
+},
+options: {
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+  }
+}
+});
 
 
 
