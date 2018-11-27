@@ -10,8 +10,7 @@ module.exports = (env) => {
     output: {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
-    }
-   
+    },
     devServer:{
       contentBase: path.join(__dirname, 'public'),
       historyApiFallback: true,
