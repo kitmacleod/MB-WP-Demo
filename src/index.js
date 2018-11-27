@@ -16,56 +16,76 @@ import bbox from '@turf/bbox';
 
 import Chart from 'chart.js';
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoia2l0bWFjbGVvZCIsImEiOiJjam12d3F0Y3QyZXBvM3ZwbjRsajMwZG53In0.XU1YIWr-iN8_tovQx93X7A';
+mapboxgl.accessToken = 'pk.eyJ1Ijoia2l0bWFjbGVvZCIsImEiOiJjaXdnOWF5YzQwMDBqMnlsZnNlYW05aHB1In0.9y6icPG278-a8uWZr8cmLQ';
 const map = new mapboxgl.Map({
   container: 'map-container',
-  style: 'mapbox://styles/mapbox/streets-v9',
+  // MB outdoorAndLochs
+  style:'mapbox://styles/kitmacleod/cjozuoutc9iv02ro4srhjg7rh',
+  // Standard tiles
+  //style: 'mapbox://styles/mapbox/outdoors-v9',
   // starting position [lng, lat]
   // CNPA coords
-  // center: [-3.617, 57.035],
-  // zoom: 8
+  center: [-3.617, 57.035],
+   zoom: 8
   // WMS example
   // zoom: 8,
   // center: [-74.5447, 40.6892]
 
   //US draw select example
-  center: [-98, 38.88],
-  zoom: 3
+  //center: [-98, 38.88],
+  //zoom: 3
+
 });
 
+// Add zoom and rotation controls
+map.addControl(new mapboxgl.NavigationControl());
+
 // Add US map layer for queryRender examples (may take function out into its own like draw)
-  map.on('load', function() {
-    // Add the source to query. In this example we're using
-    // county polygons uploaded as vector tiles
-    map.addSource('counties', {
-        "type": "vector",
-        "url": "mapbox://mapbox.82pkq93d"
-    });
+//   map.on('load', function() {
+//     // Add the source to query. In this example we're using
+//     // county polygons uploaded as vector tiles
+//     map.addSource('counties', {
+//         "type": "vector",
+//         "url": "mapbox://mapbox.82pkq93d"
+//     });
 
-    map.addLayer({
-        "id": "counties",
-        "type": "fill",
-        "source": "counties",
-        "source-layer": "original",
-        "paint": {
-            "fill-outline-color": "rgba(0,0,0,0.1)",
-            "fill-color": "rgba(0,0,0,0.1)"
-        }
-    }, 'place-city-sm'); // Place polygon under these labels.
+//     map.addLayer({
+//         "id": "counties",
+//         "type": "fill",
+//         "source": "counties",
+//         "source-layer": "original",
+//         "paint": {
+//             "fill-outline-color": "rgba(0,0,0,0.1)",
+//             "fill-color": "rgba(0,0,0,0.1)"
+//         }
+//     }, 'place-city-sm'); // Place polygon under these labels.
 
 
+//   map.addLayer({
+//     "id": "counties-highlighted",
+//     "type": "fill",
+//     "source": "counties",
+//     "source-layer": "original",
+//     "paint": {
+//       "fill-outline-color": "#484896",
+//       "fill-color": "#6e599f",
+//       "fill-opacity": 0.75
+//     },
+//     "filter": ["in","COUNTY",""]
+//   }, 'place-city-sm');
+// });
+
+// Add SEPA loch data based on MB 'how web apps work'
+map.on("load", function() {
   map.addLayer({
-    "id": "counties-highlighted",
-    "type": "fill",
-    "source": "counties",
-    "source-layer": "original",
-    "paint": {
-      "fill-outline-color": "#484896",
-      "fill-color": "#6e599f",
-      "fill-opacity": 0.75
+    id: "SepaLochsOvrlClas",
+    type: "fill",
+    source: {
+      type: "vector",
+      url: "mapbox://styles/kitmacleod/cjozo724zeb772rp6prfrq80g"
     },
-    "filter": ["in","COUNTY",""]
-  }, 'place-city-sm');
+    "source-layer": "SepaLochsOvrlClas"
+  });
 });
 
 
@@ -82,35 +102,35 @@ const draw = new MapboxDraw({
 map.addControl(draw);
 
 // Charlie's function
-map.on('draw.create', function(el) {
-   let userPolygon = el.features[0];
-   console.log(userPolygon);
+// map.on('draw.create', function(el) {
+//    let userPolygon = el.features[0];
+//    console.log(userPolygon);
 
-   // Generate bbox from polygon
-   let polygonBoundingBox = turf.bbox(userPolygon);
-   console.log(polygonBoundingBox);
+//    // Generate bbox from polygon
+//    let polygonBoundingBox = turf.bbox(userPolygon);
+//    console.log(polygonBoundingBox);
 
-   let southWest = [polygonBoundingBox[0], polygonBoundingBox[1]];
-   let northEast =[polygonBoundingBox[2], polygonBoundingBox[3]];
+//    let southWest = [polygonBoundingBox[0], polygonBoundingBox[1]];
+//    let northEast =[polygonBoundingBox[2], polygonBoundingBox[3]];
 
-   let northEastPointPixel = map.project(northEast);
-   let southWestPointPixel = map.project(southWest);
-   console.log(northEastPointPixel);
+//    let northEastPointPixel = map.project(northEast);
+//    let southWestPointPixel = map.project(southWest);
+//    console.log(northEastPointPixel);
 
-   let features = map.queryRenderedFeatures([southWestPointPixel, northEastPointPixel], { layers: ['counties'] });
+//    let features = map.queryRenderedFeatures([southWestPointPixel, northEastPointPixel], { layers: ['counties'] });
 
-   let filter = features.reduce(function(memo, feature) {
-     if (! (undefined === turf.intersect(feature, userPolygon))) {
-       // only add the property, if the feature intersects with drawn polygon
-       memo.push(feature.properties.FIPS);
-     }
-     return memo;
-   }, ['in', 'FIPS']);
+//    let filter = features.reduce(function(memo, feature) {
+//      if (! (undefined === turf.intersect(feature, userPolygon))) {
+//        // only add the property, if the feature intersects with drawn polygon
+//        memo.push(feature.properties.FIPS);
+//      }
+//      return memo;
+//    }, ['in', 'FIPS']);
 
-   map.setFilter("counties-highlighted", filter);
+//    map.setFilter("counties-highlighted", filter);
 
 
-});
+// });
 
 
 
