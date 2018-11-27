@@ -37,7 +37,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "lit-html": "^0.12.0",
     "mapbox-gl": "^0.45.0",
-    "node": "^10.11.0",
+    "node": "^10.13.0",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
     "turf": "^7.0.0-alpha.1"
