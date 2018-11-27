@@ -1,5 +1,5 @@
 const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
+// const CopyPlugin = require('copy-webpack-plugin');
 
 
 module.exports = (env) => {
@@ -30,10 +30,7 @@ module.exports = (env) => {
     },
     node: {
       fs: "empty"
-    },
-    plugins: [
-      new CopyPlugin([{from: 'data', to: 'data'}])
-    ]
+    }
   };
 };
 
