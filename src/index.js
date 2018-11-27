@@ -75,18 +75,18 @@ map.addControl(new mapboxgl.NavigationControl());
 //   }, 'place-city-sm');
 // });
 
-// Add SEPA loch data based on MB 'how web apps work'
-map.on("load", function() {
-  map.addLayer({
-    id: "SepaLochsOvrlClas",
-    type: "fill",
-    source: {
-      type: "vector",
-      url: "mapbox://styles/kitmacleod/cjozo724zeb772rp6prfrq80g"
-    },
-    "source-layer": "SepaLochsOvrlClas"
-  });
-});
+// Add SEPA loch data based on MB 'how web apps work' (not used as added to the main layer above)
+// map.on("load", function() {
+//   map.addLayer({
+//     id: "SepaLochsOvrlClas",
+//     type: "fill",
+//     source: {
+//       type: "vector",
+//       url: "mapbox://styles/kitmacleod/cjozo724zeb772rp6prfrq80g"
+//     },
+//     "source-layer": "SepaLochsOvrlClas"
+//   });
+// });
 
 
 
@@ -235,30 +235,32 @@ map.addControl(draw);
 
 
 // // From MB-GL draw example
-// map.on('draw.create', updateArea);
-// map.on('draw.delete', updateArea);
-// map.on('draw.update', updateArea);
+map.on('draw.create', updateArea);
+map.on('draw.delete', updateArea);
+map.on('draw.update', updateArea);
 
-// // Use lit-html to return polygon area or no area message
-// function updateArea(e) {
-//   let data = draw.getAll();
+// Use lit-html to return polygon area or no area message
+function updateArea(e) {
+  let data = draw.getAll();
 
-//   let areaMessage;
-//   if (data.features.length > 0) {
-//     let area = turf.area(data);
-//     let rounded_area = Math.round(area*100)/100;
-//     areaMessage = html`<p>The area is ${rounded_area} square meters </p>`
-//     console.log('data type of; ', typeof data);
-//     // let intersectData = turf.intersect(data, polyLarge);
-//     // console.log('intersectData type of; ', typeof intersectData);
-//   } else {
-//     areaMessage = html`<p>No area selected</p>`
-//   };  
+  let areaMessage;
+  if (data.features.length > 0) {
+    let area = turf.area(data);
+   // let rounded_area = Math.round(area*100)/100;
+   // May want to convert this to ha
+    let rounded_area = Math.round(area);
+    areaMessage = html`<p><strong>The area is ${rounded_area} square meters </strong> </p>`
+    console.log('data type of; ', typeof data);
+    // let intersectData = turf.intersect(data, polyLarge);
+    // console.log('intersectData type of; ', typeof intersectData);
+  } else {
+    areaMessage = html`<p>No area selected</p>`
+  };  
 
-//   const areaTemplate = html`${areaMessage}`;
-//   render(areaTemplate, outcomes__area);
+  const areaTemplate = html`${areaMessage}`;
+  render(areaTemplate, outcomes__area);
 
-// };
+};
 
 
 
@@ -268,15 +270,15 @@ const ctx = document.getElementById("testChart");
 let testChart = new Chart(ctx, {
   type: 'horizontalBar',
   data: {
-  labels:["Population"],
+  labels:["Runoff", "Phosphorus export"],
   datasets: [{
-    label: 'No of people',
-    data:[100],
-    backgroundColor: [
-      "rgba(54, 162, 235, 0.2)"
+    label: 'Percentage  reduction',
+    data:[30, 20],
+    backgroundColor: [  
+      "rgba(54, 162, 235, 0.2)", "rgba(54, 162, 235, 0.2)"
     ],
     borderColor: [
-      "rgba(54, 162,235, 1)"
+      "rgba(54, 162,235, 1)", "rgba(54, 162,235, 1)"
     ],
     borderWidth: 1
 
@@ -285,7 +287,7 @@ let testChart = new Chart(ctx, {
 },
 options: {
   scales: {
-    yAxes: [
+    xAxes: [
       {
         ticks: {
           beginAtZero: true
