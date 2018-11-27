@@ -11,6 +11,7 @@ module.exports = (env) => {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
     },
+    devtool: isProduction ? 'source-map':'cheap-module-eval-source-map',
     devServer:{
       contentBase: path.join(__dirname, 'public'),
       historyApiFallback: true,
