@@ -10,6 +10,9 @@
     "start": "node server/server.js",
     "heroku-postbuild": "npm run build:prod"
   },
+  "engines": {
+    "node": "10.13.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kitmacleod/MB-WP-Demo.git"
