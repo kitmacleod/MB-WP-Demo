@@ -1,4 +1,5 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // const CopyPlugin = require('copy-webpack-plugin');
 
 
@@ -10,6 +11,15 @@ module.exports = (env) => {
     output: {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
+    },
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            mangle: false
+          }
+        })
+      ],
     },
     devtool: isProduction ? 'source-map':'cheap-module-eval-source-map',
     devServer:{
