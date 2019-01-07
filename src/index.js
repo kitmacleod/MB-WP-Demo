@@ -14,6 +14,8 @@ import intersect from '@turf/intersect';
 import polygon from '@turf/helpers';
 import bbox from '@turf/bbox';
 
+import DrawRectangle from 'mapbox-gl-draw-rectangle-mode';
+
 import Chart from 'chart.js';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoia2l0bWFjbGVvZCIsImEiOiJjaXdnOWF5YzQwMDBqMnlsZnNlYW05aHB1In0.9y6icPG278-a8uWZr8cmLQ';
@@ -88,18 +90,25 @@ map.addControl(new mapboxgl.NavigationControl());
 //   });
 // });
 
+// Adding rectangle mode to draw
+const modes = MapboxDraw.modes;
+modes.draw_rectangle = DrawRectangle;
 
 
 // Charlie example of draw to select polygons
-// Need to add Draw
+// 070119 added modes: modes, for rectangle mode (may remove)
 const draw = new MapboxDraw({
   displayControlsDefault: false,
+  modes: modes,
   controls: {
     polygon: true,
     trash: true
   }
 });
 map.addControl(draw);
+
+// Draw mode (may remove)
+draw.changeMode('draw_rectangle');
 
 // Charlie's function
 // map.on('draw.create', function(el) {
