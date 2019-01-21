@@ -1,5 +1,7 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const CopyPlugin = require('copy-webpack-plugin');
 
 
@@ -7,10 +9,18 @@ module.exports = (env) => {
   const isProduction = env === 'production';
 
   return {
-    entry:'./src/index.js',
+    entry: {
+      pageOne: './src/index.js',
+      pageTwo: './src/index.js'
+    },
     output: {
       path: path.join(__dirname, 'public', 'dist'),
-      filename: 'bundle.js'
+      filename: '[name].bundle.js'
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+      }
     },
     optimization: {
       minimizer: [
@@ -38,6 +48,18 @@ module.exports = (env) => {
           ]
         }]
     },
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'public/index.html'
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'map2.html',
+        template: 'public/index.html'
+      })
+    
+    ],
     node: {
       fs: "empty"
     }
