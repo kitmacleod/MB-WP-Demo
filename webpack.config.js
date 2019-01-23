@@ -1,16 +1,13 @@
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production'
 
-// Old way to configure
-// module.exports = (env) => {
-//   const isProduction = env === 'production';
+// TODO 
+// May need uglify JS
+// Should have separate config files
 
-//   return {
   module.exports ={
     entry: {
       pageOne: './src/index.js',
@@ -26,15 +23,7 @@ const devMode = process.env.NODE_ENV !== 'production'
         chunks: 'all'
       }
     },
-    optimization: {
-      minimizer: [
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            mangle: false
-          }
-        })
-      ],
-    },
+   
     devtool: devMode ? 'cheap-module-eval-source-map': 'source-map',
     devServer:{
       contentBase: path.join(__dirname, 'public'),
@@ -65,8 +54,8 @@ const devMode = process.env.NODE_ENV !== 'production'
         template: 'public/index.html'
       }),
       new MiniCssExtractPlugin({
-        filename: devMode ? '[name].css': '[name].[hash].css',
-        chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+        filename: devMode ? '[name].css': '[name].[contenthash].css',
+        chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css'
 
       })
   
