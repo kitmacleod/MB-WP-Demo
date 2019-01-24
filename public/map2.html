@@ -15,8 +15,52 @@
 
   </head>
 
-  <body> 
-    <p>Test</p>
-    </body>
+  <body>
 
-    </html>
+
+    <div class="container">
+      <header class="header">
+        <h1 class="header__title">Facilitated outcome-based land management</h1>
+        <h2 class="header__subtitle">Under development</h2>
+      </header>
+      <nav class="nav">
+        
+        <p><a href="map2.html">
+          Map2
+        </a></p>
+        
+      </nav>
+      <div id="map-container"></div>
+      
+      <div id="tools">
+        <a id="clear"></a>
+      </div>
+      <div class="outcomes">
+        <h2 class="outcomes__title">Potential environmental and financial outcomes</h2>
+        <h3 class="outcomes__subtitle">Information on area selected</h3>
+        <h4 class="outcomes__result"> </h4>
+        <div id="outcomes__area"></div>
+        <h3 class="outcomes__subtitle">Information on environmental outcomes</h3>
+        <div id="view"></div>
+        <canvas id="testChart"></canvas>
+        <h3 class="outcomes__subtitle">Information on financial outcomes</h3>
+        <p class="text">£250</p>
+      </div>
+      <div class="input">
+        <h2 class="header__subtitle">Please select measure:</h2>
+        <form class="form-inline">
+          <label>Type of measure &nbsp;</label>
+          <select id="type">
+            <option value="area">Buffer</option>
+            <option value="length">Hedgerow</option>
+          </select>
+        </form>
+      </div>
+      <footer class="main-footer"> </footer>
+    </div>
+
+
+
+    <script src="/dist/pageOne.bundle.js"></script>
+  </body>
+</html>

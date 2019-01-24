@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV !== 'production'
 
 // TODO 
@@ -10,15 +10,14 @@ const devMode = process.env.NODE_ENV !== 'production'
 
   module.exports ={
     entry: {
-      pageOne: './src/index.js',
-      pageTwo: './src/index.js'
+      app: './src/index.js',
     },
     output: {
       path: path.join(__dirname, 'public', 'dist'),
       filename: '[name].bundle.js'
     },
     mode: devMode ? 'development':'production',
-    optimization: {
+     optimization: {
       splitChunks: {
         chunks: 'all'
       }
@@ -37,7 +36,7 @@ const devMode = process.env.NODE_ENV !== 'production'
           test:/\.(sa|sc|c)ss$/,
           use: [
             devMode ? 'style-loader' : MiniCssExtractPlugin,
-            //'style-loader',
+            'style-loader',
             'css-loader',
             'sass-loader'
           ]
@@ -47,11 +46,13 @@ const devMode = process.env.NODE_ENV !== 'production'
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: 'public/index.html'
+        template: 'public/index.html',
+        chunks: ['app']
       }),
       new HtmlWebpackPlugin({
         filename: 'map2.html',
-        template: 'public/index.html'
+        template: 'public/map2.html', 
+        chunks: ['app']
       }),
       new MiniCssExtractPlugin({
         filename: devMode ? '[name].css': '[name].[contenthash].css',
