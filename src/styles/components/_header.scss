@@ -1,22 +1,19 @@
 .header {
- // background: white;
-  background: red;
+  background: white;
   color: white;
   margin-bottom: $l-size;
   padding: $m-size 0;
 }
 
 .header__title {
-  color: red;
-  // color: $off-black;
+  color: $off-black;
   font-size: $l-size;
   margin: 0;
   padding: 0.5rem;
 }
 
 .header__subtitle {
-  //color: $off-black;
-  color: green;
+  color: $off-black;
   font-size: $m-size;
   font-weight: 1000;
   padding: 0.5rem;

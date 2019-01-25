@@ -1,9 +1,9 @@
-.menu {
+.menu__row {
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: $s-size;
   overflow: hidden;
-  background-color: #333333;
+  background-color: $off-white;
 }
 
 .menu__list {
@@ -11,13 +11,17 @@
 }
 
 .menu__link {
+  border-radius: $m-round;
   display: block;
-  color: white;
+  background-color: $off-black;
+  color: $off-white;
   text-align: center;
   padding: 16px;
   text-decoration: none;
 }
 
 .menu__link:hover {
-  background-color: #111111;
+  background-color: $light-grey;
+  border-radius: $m-round;
+  color: $off-black;
 }
