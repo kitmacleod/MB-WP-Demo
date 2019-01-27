@@ -1,0 +1,120 @@
+// Copied code
+// TODO  needs formating to BEM
+// TODO not all rulesets used
+
+/*Buttons*/
+.btn {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 1.0rem;
+  background-color: #3386c0;
+  color: #fff;
+  display: block;
+  margin: 0;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color:#4ea0da;
+  color: #fff;
+}
+
+.btn-blue {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  background-color: #3386c0;
+  color: #fff;
+  padding: 10px 20px;
+  vertical-align: middle;
+}
+
+.btn-blue:hover, .btn-blue:active {
+  background-color: #4ea0da;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-grey {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  background-color: #4d6379;
+  color: #fff;
+  padding: 10px 20px;
+  vertical-align: middle;
+}
+
+.btn-grey:hover, .btn-grey:active {
+  background-color: #7c94ac;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-modal {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  background-color: #fff;
+  border: 1.5px solid #4d6379;
+  color: #4d6379;
+  padding: 10px 20px;
+  vertical-align: middle;
+}
+
+.btn-modal:hover, .btn-grey:active {
+  background-color: #4d6379;
+  color: #fff;
+  text-decoration: none;
+}
+
+div.dt-buttons {
+  display: flex;
+  justify-content: center;
+  float: inherit !important;
+}
+
+.dt-button.new {
+  font-family: "Roboto", Arial, Helvetica, sans-serif !important;
+  font-size: 0.85rem;
+  background-color: #fff;
+  background-image: none;
+  color: #4d6379;
+  margin: 4px;
+  padding: 5px 10px;
+  border: 1.5px solid #4d6379;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.dt-button.new:hover, .dt-button.new:focus, .dt-button.new:active {
+  font-family: "Roboto", Arial, Helvetica, sans-serif !important;
+  font-size: 0.85rem;
+  background-color: #4d6379;
+  background-image: none;
+  color: #fff;
+  margin: 4px;
+  padding: 5px 10px;
+  border: 1.5px solid #4d6379;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.dt-button.new:hover:not(.disabled) {
+  font-family: "Roboto", Arial, Helvetica, sans-serif !important;
+  font-size: 0.85rem;
+  background-color: #4d6379;
+  background-image: none;
+  color: #fff;
+  margin: 4px;
+  padding: 5px 10px;
+  border: 1.5px solid #4d6379;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/*Buttons*/

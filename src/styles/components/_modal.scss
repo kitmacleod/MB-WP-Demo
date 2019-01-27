@@ -1,0 +1,136 @@
+// Copied code
+// TODO  needs formating to BEM
+// TODO not all rulesets used
+.modal{
+
+}
+
+// From app
+
+
+.modal-body h4 {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 0;}
+
+  .modal-body p {
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 150%;
+    color: #444;
+    margin-top: 5px;
+}
+
+.modal-footer a {
+  color: #444;
+  word-wrap: break-word;
+  text-decoration: none;
+}
+
+.modal-footer a:hover, a:focus {
+  color: #444;
+  text-decoration: underline;
+  outline: 0;
+} 
+
+.btn-modal {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  background-color: #fff;
+  border: 1.5px solid #4d6379;
+  color: #4d6379;
+  padding: 10px 20px;
+  vertical-align: middle;
+}
+
+.btn-modal:hover, .btn-grey:active {
+  background-color: #4d6379;
+  color: #fff;
+  text-decoration: none;
+}
+
+
+/*Modal*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #fff;
+  margin: auto;
+  border: 1px solid #888;
+  width: 100%;
+  height: 100vh;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+.modal-header {
+  padding: 25px;
+  background-color: #f4f6f8;
+  max-height: 100px;
+}
+
+.modal-body {
+  padding-left: 25px;
+  padding-right: 50px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  background-color: #fff;
+  overflow-y: scroll;
+}
+
+.modal-footer {
+  padding-left: 20px;
+  padding-bottom: 5px;
+  background-color: #a9b1b5;
+}
+
+.modal-footer p {
+  color: #111;
+  font-weight: 600;
+}
+
+@media only screen and (min-width: 700px)  {
+  .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+  }
+
+  .modal-content {
+      position: relative;
+      background-color: #fff;
+      margin: auto;
+      border: 1px solid #888;
+      width: 50%;
+      height: 70%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+  }
+}
+/*Modal*/

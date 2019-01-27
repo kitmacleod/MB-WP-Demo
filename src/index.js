@@ -249,8 +249,28 @@ map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
 
 // Use lit-html to return polygon area or no area message
+// TODO may change data to be more specific e.g. drawnFeature
 function updateArea(e) {
   let data = draw.getAll();
+  console.log(draw.getAll());
+
+  // Save drawn FeatureCollection as a string using localStorage
+  let savedFeature;
+  console.log('savedFeature type: ',typeof savedFeature);
+  let drawnFeature = draw.get(data);
+  console.log('drawnFeature type: ',typeof drawnFeature);
+  let drawnFeatureCoord = drawnFeature[0];
+  console.log('drawnFeatureCoord type: ',typeof drawnFeature);
+
+
+  localStorage.setItem('savedFeature', drawnFeature);
+  if(drawnFeature) {
+    console.log("savedFeature exists");
+  } else{
+    console.log("savedFeature does not exist");
+  };
+  
+
 
   let areaMessage;
   if (data.features.length > 0) {
@@ -371,6 +391,36 @@ options: {
 // Turf intersection test (working)
 // let intersectTest = intersect(polyLarge, polyThin);
 // console.log('in type intersectTest: ',typeof intersectTest);
+
+
+
+// Testing modal
+
+// Get the modal
+var modal = document.getElementById('learn-more-modal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("modal-btn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
 
 
