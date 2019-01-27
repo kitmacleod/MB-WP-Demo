@@ -252,8 +252,12 @@ map.on('draw.update', updateArea);
 // TODO may change data to be more specific e.g. drawnFeature
 function updateArea(e) {
   let data = draw.getAll();
-  console.log(draw.getAll());
+  console.log('draw.getAll', draw.getAll());
 
+  let dataCombine =turf.combine(draw.getAll());
+  console.log(dataCombine);
+
+  // TODO: may remove, as not needed
   // Save drawn FeatureCollection as a string using localStorage
   let savedFeature;
   console.log('savedFeature type: ',typeof savedFeature);
@@ -269,7 +273,12 @@ function updateArea(e) {
   } else{
     console.log("savedFeature does not exist");
   };
+
+  // DRAFT:trying NJ queryRenderedFeatures
+  // TRY: to see what turf.combine does
   
+
+
 
 
   let areaMessage;
