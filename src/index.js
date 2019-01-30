@@ -22,13 +22,26 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoia2l0bWFjbGVvZCIsImEiOiJjaXdnOWF5YzQwMDBqMnlsZ
 const map = new mapboxgl.Map({
   container: 'map-container',
   // MB outdoorAndLochs
-  style:'mapbox://styles/kitmacleod/cjozuoutc9iv02ro4srhjg7rh',
+  //style:'mapbox://styles/kitmacleod/cjozuoutc9iv02ro4srhjg7rh',
+  // MB OutdoorsAndOrdSurWoodland (throwing an error in console)
+  // style: 'mapbox://styles/kitmacleod/cjrhtu5959a3e2totyhn412jb',
+  // MB Outdoor Style- test (throwing the same errors)
+  // style: 'mapbox://styles/kitmacleod/cjrhx6z7w0b7d2spefrrst402',
+  // MB Basic Template - test
+  // style: 'mapbox://styles/kitmacleod/cjrhxdf9r8lfb2spdnt1n98zt',
   // Standard tiles
-  //style: 'mapbox://styles/mapbox/outdoors-v9',
+  // style: 'mapbox://styles/mapbox/outdoors-v9',
+  // SatAddedLanduseFromTerrain
+  style: 'mapbox://styles/kitmacleod/cjritfyfz000e2smtq157niyp',
   // starting position [lng, lat]
   // CNPA coords
   center: [-3.617, 57.035],
-   zoom: 8
+
+  
+  // Normal zoom
+  // zoom: 8
+  // Test zoom
+   zoom: 12
   // WMS example
   // zoom: 8,
   // center: [-74.5447, 40.6892]
@@ -241,7 +254,8 @@ draw.changeMode('draw_rectangle');
 // //   },'aeroway-taxiway');
 // // });
 
-
+//Dev show tile boundaries 
+map.showTileBoundaries = true;
 
 // // From MB-GL draw example
 map.on('draw.create', updateArea);
@@ -254,25 +268,46 @@ function updateArea(e) {
   let data = draw.getAll();
   console.log('draw.getAll', draw.getAll());
 
-  let dataCombine =turf.combine(draw.getAll());
-  console.log(dataCombine);
+  // TODO: may need to add a test that data.features.length > 0
+  // Create bbox and use (NJ code)
+  let bbox =turf.bbox(data.features[0]);
+  console.log(bbox);
+
+  let southWest = [bbox[0], bbox[1]];
+  let northEast = [bbox[2], bbox[3]];
+  let northEastPointPixel = map.project(northEast);
+  let southWestPointPixel = map.project(southWest);
+  // console.log(southWestPointPixel);
+  // TODO: need to add layers, this is throwing an error 
+
+   let tileFeatures = map.queryRenderedFeatures([southWestPointPixel, northEastPointPixel], { layers: [ 'landcover' ]});
+  console.log(tileFeatures);
+  // DRAFT:  parse the tileFeature based on drawnFeature
+//   tileFeatures.forEach((feature) => {
+//     if (turf.intersect(APP.areaOfInterest.features[0], feature)) {
+//         let item = JSON.parse(feature.properties.species);
+//         species = species.concat(item);
+//     }
+// });
+
+
 
   // TODO: may remove, as not needed
   // Save drawn FeatureCollection as a string using localStorage
-  let savedFeature;
-  console.log('savedFeature type: ',typeof savedFeature);
-  let drawnFeature = draw.get(data);
-  console.log('drawnFeature type: ',typeof drawnFeature);
-  let drawnFeatureCoord = drawnFeature[0];
-  console.log('drawnFeatureCoord type: ',typeof drawnFeature);
+  // let savedFeature;
+  // console.log('savedFeature type: ',typeof savedFeature);
+  // let drawnFeature = draw.get(data);
+  // console.log('drawnFeature type: ',typeof drawnFeature);
+  // let drawnFeatureCoord = drawnFeature[0];
+  // console.log('drawnFeatureCoord type: ',typeof drawnFeature);
 
 
-  localStorage.setItem('savedFeature', drawnFeature);
-  if(drawnFeature) {
-    console.log("savedFeature exists");
-  } else{
-    console.log("savedFeature does not exist");
-  };
+  // localStorage.setItem('savedFeature', drawnFeature);
+  // if(drawnFeature) {
+  //   console.log("savedFeature exists");
+  // } else{
+  //   console.log("savedFeature does not exist");
+  // };
 
   // DRAFT:trying NJ queryRenderedFeatures
   // TRY: to see what turf.combine does
@@ -288,7 +323,7 @@ function updateArea(e) {
    // May want to convert this to ha
     let rounded_area = Math.round(area);
     areaMessage = html`<p><strong>The area is ${rounded_area} square meters </strong> </p>`
-    console.log('data type of; ', typeof data);
+    // console.log('data type of; ', typeof data);
     // let intersectData = turf.intersect(data, polyLarge);
     // console.log('intersectData type of; ', typeof intersectData);
   } else {

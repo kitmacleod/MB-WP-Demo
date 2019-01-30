@@ -21,6 +21,7 @@ module.exports = (env) => {
         })
       ],
     },
+    // TODO: may change this as not sure development source maps are working
     devtool: isProduction ? 'source-map':'cheap-module-eval-source-map',
     devServer:{
       contentBase: path.join(__dirname, 'public'),
