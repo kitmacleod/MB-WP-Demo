@@ -271,7 +271,7 @@ function updateArea(e) {
   // TODO: may need to add a test that data.features.length > 0
   // Create bbox and use (NJ code)
   let bbox =turf.bbox(data.features[0]);
-  console.log(bbox);
+  console.log('bbox', bbox);
 
   let southWest = [bbox[0], bbox[1]];
   let northEast = [bbox[2], bbox[3]];
@@ -282,18 +282,24 @@ function updateArea(e) {
 
   let tileFeatures = map.queryRenderedFeatures([southWestPointPixel, northEastPointPixel], { layers: [ 'landcover' ]});
   console.log(tileFeatures);
-
+  let areaList = [];
+  let classList = [];
   // Trying to get information out of tileFeatures
   tileFeatures.forEach((feature)=> {
+    let featureClass = feature.properties.class;
+    console.log('featureClass', featureClass);
+    classList = classList.concat(featureClass);
+    console.log('classList', classList);
+    console.log('classList type: ',typeof classList);
     let featureArea = turf.area(feature);
-    console.log(featureArea);
-    let areaList = [];
-    areaList = areaList.concat(featureArea);
-    console.log(areaList);
+    console.log('featureArea', featureArea);
+    let featureAreaRound = Math.round(featureArea);
+    areaList = areaList.concat(featureAreaRound);
+    console.log('areaList', areaList);
+    console.log('areaList type: ',typeof areaList);
   });
   
-
-
+ 
 
 
 
