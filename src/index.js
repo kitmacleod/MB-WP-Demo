@@ -3,7 +3,7 @@
 import'./styles/styles.scss';
 // import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw';
-import {html, render} from 'lit-html';
+import {html, render, templateCaches} from 'lit-html';
 // import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 // var MapboxDraw = require('@mapbox/mapbox-gl-draw');
 
@@ -280,8 +280,23 @@ function updateArea(e) {
   // console.log(southWestPointPixel);
   // TODO: need to add layers, this is throwing an error 
 
-   let tileFeatures = map.queryRenderedFeatures([southWestPointPixel, northEastPointPixel], { layers: [ 'landcover' ]});
+  let tileFeatures = map.queryRenderedFeatures([southWestPointPixel, northEastPointPixel], { layers: [ 'landcover' ]});
   console.log(tileFeatures);
+
+  // Trying to get information out of tileFeatures
+  tileFeatures.forEach((feature)=> {
+    let featureArea = turf.area(feature);
+    console.log(featureArea);
+    let areaList = [];
+    areaList = areaList.concat(featureArea);
+    console.log(areaList);
+  });
+  
+
+
+
+
+
   // DRAFT:  parse the tileFeature based on drawnFeature
 //   tileFeatures.forEach((feature) => {
 //     if (turf.intersect(APP.areaOfInterest.features[0], feature)) {
