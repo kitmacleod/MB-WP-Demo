@@ -262,16 +262,21 @@ map.on('draw.create', updateArea);
 map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
 
+
+// Def these as need outwith updateArea
+let areaList = [];
+let classList = [];
+
 // Use lit-html to return polygon area or no area message
 // TODO may change data to be more specific e.g. drawnFeature
 function updateArea(e) {
   let data = draw.getAll();
-  console.log('draw.getAll', draw.getAll());
+ // console.log('draw.getAll', draw.getAll());
 
   // TODO: may need to add a test that data.features.length > 0
   // Create bbox and use (NJ code)
   let bbox =turf.bbox(data.features[0]);
-  console.log('bbox', bbox);
+  // console.log('bbox', bbox);
 
   let southWest = [bbox[0], bbox[1]];
   let northEast = [bbox[2], bbox[3]];
@@ -281,25 +286,75 @@ function updateArea(e) {
   // TODO: need to add layers, this is throwing an error 
 
   let tileFeatures = map.queryRenderedFeatures([southWestPointPixel, northEastPointPixel], { layers: [ 'landcover' ]});
-  console.log(tileFeatures);
-  let areaList = [];
-  let classList = [];
+  //console.log(tileFeatures);
+ 
   // Trying to get information out of tileFeatures
   tileFeatures.forEach((feature)=> {
     let featureClass = feature.properties.class;
-    console.log('featureClass', featureClass);
+    // console.log('featureClass', featureClass);
     classList = classList.concat(featureClass);
-    console.log('classList', classList);
-    console.log('classList type: ',typeof classList);
+    // console.log('classList', classList);
+    // console.log('classList type: ',typeof classList);
     let featureArea = turf.area(feature);
-    console.log('featureArea', featureArea);
+    // console.log('featureArea', featureArea);
     let featureAreaRound = Math.round(featureArea);
     areaList = areaList.concat(featureAreaRound);
     console.log('areaList', areaList);
     console.log('areaList type: ',typeof areaList);
   });
   
- 
+ // Update chart
+ // Try simpler function, if all code in this func then may not be needed
+//  function updateChart(){
+//  // Docs function
+//  //function addData(testChart, classList, areaList) {
+//  // testChart.data.labels.push(classList);
+//  // try simpler assignment
+//    testChart.data.labels = classList;
+//    testChart.data.datasets.data = areaList; 
+//   //  testChart.datasets.forEach((datasets) => {
+//   //    datasets.data.push(areaList);
+//    testChart.update;
+//    console.log('testChart.data.datasets',testChart.data.datasets);
+//  };
+
+ // Invoke function
+ //updateChart();
+
+// Chart example
+// get a basic chart working here linked to scss
+const ctx = document.getElementById("testChart");
+console.log('chartAreaList', areaList);
+let testChart = new Chart(ctx, {
+  type: 'horizontalBar',
+  data: {
+  labels: classList,
+  datasets: [{
+    label: 'Land cover',
+
+    data: areaList,
+    backgroundColor: [  
+      "rgba(54, 162, 235, 0.2)", "rgba(54, 162, 235, 0.2)"
+    ],
+    borderColor: [
+      "rgba(54, 162,235, 1)", "rgba(54, 162,235, 1)"
+    ],
+    borderWidth: 1
+
+  }
+]
+},
+options: {
+  scales: {
+    xAxes: [
+      {
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+  }
+}
+});
 
 
 
@@ -357,17 +412,24 @@ function updateArea(e) {
 };
 
 
+// Test if classList and areaList work here
+// classList = ['grass', 'crop'];
+// areaList = [10000, 24000];
+
+// Chart was here
 
 // Chart example
 // get a basic chart working here linked to scss
 const ctx = document.getElementById("testChart");
+console.log('chartAreaList', areaList);
 let testChart = new Chart(ctx, {
   type: 'horizontalBar',
   data: {
-  labels:["Runoff", "Phosphorus export"],
+  labels: classList,
   datasets: [{
-    label: 'Percentage  reduction',
-    data:[30, 20],
+    label: 'Land cover',
+
+    data: areaList,
     backgroundColor: [  
       "rgba(54, 162, 235, 0.2)", "rgba(54, 162, 235, 0.2)"
     ],
