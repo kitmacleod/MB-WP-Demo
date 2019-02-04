@@ -1,5 +1,6 @@
  import mapboxgl from 'mapbox-gl';
 //import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
+import 'normalize.css/normalize.css';
 import'./styles/styles.scss';
 // import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw';
