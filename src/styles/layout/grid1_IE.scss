@@ -1,0 +1,118 @@
+.header {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: header;
+}
+
+.nav {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: nav;
+}
+
+.map-container {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: map-container;
+}
+
+.outcomes {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  grid-area: outcomes;
+}
+
+.input {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: input;
+}
+
+.footer {
+  -ms-grid-row: 6;
+  -ms-grid-column: 1;
+  grid-area: footer;
+}
+
+.container {
+  display: -ms-grid;
+  display: grid;
+  
+  //grid-gap: 1em;
+      grid-template-areas:
+  "header"
+  "nav"
+  "map-container"
+  "input"
+  "outcomes"
+  "footer";
+  -ms-grid-rows: 1fr 1fr minmax(400px, 600px) 2fr 1fr;
+  grid-template-rows: 1fr 1fr minmax(400px, 600px) 2fr 1fr;
+  width: 95vw;
+  height: 95vh;
+}
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+/* This is mobile first default, need to create more space for chart */
+
+@media only screen and (min-width: 800px) {
+  /*tablets, need to adjust */
+  .container {
+    /* change to em/rem */
+    -ms-grid-columns: minmax(400px, 600px) 1fr;
+    grid-template-columns: minmax(400px, 600px) 1fr;
+    -ms-grid-rows: 1fr 1fr minmax(400px, 600px) 2fr 1fr;
+    grid-template-rows: 1fr 1fr minmax(400px, 600px) 2fr 1fr;
+        grid-template-areas:
+    "header header"
+    "nav nav"
+    "map-container outcomes"
+    "input input"
+    "footer footer";
+    // width: 95vw;
+    // height: 95vh;
+  }
+  nav ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .header {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+  }
+  .nav {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+  }
+  .map-container {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+  }
+  .outcomes {
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
+  }
+  .input {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+  }
+  .footer {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+  }
+}
+
