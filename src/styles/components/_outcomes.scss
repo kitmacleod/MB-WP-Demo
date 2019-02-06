@@ -2,6 +2,13 @@
   background-color: white;
 }
 
+.outcomes__chartContainer {
+  position: relative;
+  margin: auto;
+  height: 90vh;
+  width: 90vw;
+}
+
 .outcomes__title {
   color: $off-black;
   font-size: $l-size;
@@ -27,4 +34,11 @@
 #outcomes__area {
   font-size: $m-size;
   padding: 0.1rem;
+}
+
+@media (min-width: $desktop-breakpoint) {
+  .outcomes__chartContainer {
+  height: 40vh;
+  width: 40vw;
+  }
 }

@@ -43,7 +43,7 @@ nav ul {
 }
 /* This is mobile first default, need to create more space for chart */
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: $desktop-breakpoint) {
   /*tablets, need to adjust */
   .container {
     /* change to em/rem */
