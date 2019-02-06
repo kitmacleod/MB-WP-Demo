@@ -327,31 +327,42 @@ function updateArea(e) {
 const ctx = document.getElementById("testChart");
 console.log('chartAreaList', areaList);
 let testChart = new Chart(ctx, {
-  type: 'horizontalBar',
+  type: 'bar',
   data: {
   labels: classList,
   datasets: [{
-    label: 'Land cover',
+    label: 'Land cover area',
 
-    data: areaList,
-    backgroundColor: [  
-      "rgba(54, 162, 235, 0.2)", "rgba(54, 162, 235, 0.2)"
-    ],
-    borderColor: [
-      "rgba(54, 162,235, 1)", "rgba(54, 162,235, 1)"
-    ],
-    borderWidth: 1
+    data: areaList
+    // backgroundColor: [  
+    //   "rgba(54, 162, 235, 0.2)", "rgba(54, 162, 235, 0.2)"
+    // ],
+    // borderColor: [
+    //   "rgba(54, 162,235, 1)", "rgba(54, 162,235, 1)"
+    // ],
+    // borderWidth: 1
 
   }
 ]
 },
 options: {
+  responsive: true,
   scales: {
     xAxes: [
       {
         ticks: {
-          beginAtZero: true
+          beginAtZero: true, 
+          precision: 0
+        },
+        gridLines: {
+          display: false
         }
+      }],
+    yAxes: [
+      {
+      gridLines: {
+        display: false
+      }
       }]
   }
 }
@@ -421,38 +432,38 @@ options: {
 
 // Chart example
 // get a basic chart working here linked to scss
-const ctx = document.getElementById("testChart");
-console.log('chartAreaList', areaList);
-let testChart = new Chart(ctx, {
-  type: 'horizontalBar',
-  data: {
-  labels: classList,
-  datasets: [{
-    label: 'Land cover',
+// const ctx = document.getElementById("testChart");
+// console.log('chartAreaList', areaList);
+// let testChart = new Chart(ctx, {
+//   type: 'horizontalBar',
+//   data: {
+//   labels: classList,
+//   datasets: [{
+//     label: 'Land cover',
 
-    data: areaList,
-    backgroundColor: [  
-      "rgba(54, 162, 235, 0.2)", "rgba(54, 162, 235, 0.2)"
-    ],
-    borderColor: [
-      "rgba(54, 162,235, 1)", "rgba(54, 162,235, 1)"
-    ],
-    borderWidth: 1
+//     data: areaList,
+//     backgroundColor: [  
+//       "rgba(54, 162, 235, 0.2)", "rgba(54, 162, 235, 0.2)"
+//     ],
+//     borderColor: [
+//       "rgba(54, 162,235, 1)", "rgba(54, 162,235, 1)"
+//     ],
+//     borderWidth: 1
 
-  }
-]
-},
-options: {
-  scales: {
-    xAxes: [
-      {
-        ticks: {
-          beginAtZero: true
-        }
-      }]
-  }
-}
-});
+//   }
+// ]
+// },
+// options: {
+//   scales: {
+//     xAxes: [
+//       {
+//         ticks: {
+//           beginAtZero: true
+//         }
+//       }]
+//   }
+// }
+// });
 
 
 
