@@ -120,6 +120,7 @@ const draw = new MapboxDraw({
   }
 });
 map.addControl(draw);
+map.addControl(new mapboxgl.ScaleControl());
 
 // Draw mode (may remove)
 draw.changeMode('draw_rectangle');
