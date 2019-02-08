@@ -42,7 +42,10 @@ const map = new mapboxgl.Map({
   // Normal zoom
   // zoom: 8
   // Test zoom
-   zoom: 12
+   zoom: 12,
+   // Set to limit to Scotland and stop blur in sat layer 
+   minZoom: 6,
+   maxZoom: 18
   // WMS example
   // zoom: 8,
   // center: [-74.5447, 40.6892]
@@ -124,6 +127,35 @@ map.addControl(new mapboxgl.ScaleControl());
 
 // Draw mode (may remove)
 draw.changeMode('draw_rectangle');
+
+
+
+
+
+  // TODO tried 070219 to add draft legend on page load (could not position it correctly)
+
+// map.on('load', function() {
+//   // TODO full list
+// var landLayers = ['Crop', 'Grass', 'Scrub'];
+// // TODO add actual colours
+// var landColors = ['#FFEDA0', '#FED976', '#FEB24C']; 
+
+// for (var i = 0; i < landLayers.length; i++) {
+//   var landLayer = landLayers[i];
+//   var landColor = landColors[i];
+//   var item = document.createElement('div');
+//   let key = document.createElement('span');
+//   key.className = 'legend-key';
+//   key.style.backgroundColor = landColor;
+  
+//   let value = document.createElement('span');
+//   value.innerHTML = landLayer;
+//   item.appendChild(key);
+//   item.appendChild(value);
+//   legend.appendChild(item); 
+// }
+// });
+
 
 // Charlie's function
 // map.on('draw.create', function(el) {
@@ -275,6 +307,10 @@ function updateArea(e) {
   let data = draw.getAll();
  // console.log('draw.getAll', draw.getAll());
 
+
+
+
+
   // TODO: may need to add a test that data.features.length > 0
   // Create bbox and use (NJ code)
   let bbox =turf.bbox(data.features[0]);
@@ -288,12 +324,26 @@ function updateArea(e) {
   // TODO: need to add layers, this is throwing an error 
 
   let tileFeatures = map.queryRenderedFeatures([southWestPointPixel, northEastPointPixel], { layers: [ 'landcover' ]});
-  //console.log(tileFeatures);
+  console.log('tileFeatures',tileFeatures);
+  console.log('tileFeature type: ',typeof tileFeature);
+
+  // // Try GEE code re mapping over a feature collection
+  // // Have the featureCollection = tileFeatures
+  // var addArea = function(feature) {
+  //   return feature.set({areaHa: feature.geometry().area().divide(100 * 100)}) 
+  // };
+  // //console.log('addArea', addArea); // Equation
+  // // Map the area getting function over the FeatureCollection
+  // var areaAdded = tileFeatures.map(addArea);
+  // console.log('areaAdded', areaAdded);
+
+
+
  
   // Trying to get information out of tileFeatures
   tileFeatures.forEach((feature)=> {
     let featureClass = feature.properties.class;
-    // console.log('featureClass', featureClass);
+     console.log('featureClass', featureClass);
     classList = classList.concat(featureClass);
     // console.log('classList', classList);
     // console.log('classList type: ',typeof classList);
@@ -304,7 +354,13 @@ function updateArea(e) {
     console.log('areaList', areaList);
     console.log('areaList type: ',typeof areaList);
   });
+
+  // TODO alternative to .forEach
   
+
+
+
+
  // Update chart
  // Try simpler function, if all code in this func then may not be needed
 //  function updateChart(){
